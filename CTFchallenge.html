@@ -30,10 +30,6 @@
             width: 300px;
             margin-right: 10px;
         }
-        #hint {
-            margin-top: 20px;
-            font-size: 1.2em;
-        }
         #result {
             margin-top: 20px;
             font-size: 1.5em;
@@ -43,13 +39,10 @@
 </head>
 <body>
     <h1>Capture the Flag - Web Encryption Challenge</h1>
-    <p>Find the encrypted flag and decrypt it to reveal the answer. The encrypted flag is hidden on this page. Can you crack the code?</p>
+    <p>Find the encrypted flag and decrypt it to reveal the answer. The flag is hidden on this page. Can you crack the code?</p>
     
-    <!-- Button to reveal encrypted flag -->
-    <button onclick="revealEncryptedFlag()">Find the Flag</button>
-    
-    <!-- Display hint with encrypted flag -->
-    <p id="hint"></p>
+    <!-- Button to reveal the hint (no encryption here, just the text) -->
+    <button onclick="revealHint()">Find the Flag</button>
     
     <!-- Input for user to enter decrypted flag -->
     <input type="text" id="flagInput" placeholder="Enter decrypted flag here">
@@ -64,9 +57,9 @@
         // Encrypted flag (Base64 encoded)
         const encryptedFlag = "Q1RGe3lXbGJlX3R5aGVuY2U=";  // "CTF{You_found_the_flag}" in base64
 
-        // Function to reveal the encrypted flag when the user clicks 'Find the Flag'
-        function revealEncryptedFlag() {
-            document.getElementById("hint").innerText = "Encrypted Flag (Base64): " + encryptedFlag;
+        // Function to reveal the hint (no encryption here, just an informative hint)
+        function revealHint() {
+            document.getElementById("result").innerText = "The flag is encrypted in Base64, find the decryption!";
         }
 
         // Function to check if the user's input matches the decrypted flag
