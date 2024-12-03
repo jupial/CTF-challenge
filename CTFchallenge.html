@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTF Web Encryption Challenge</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0; 
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        h1, h2 {
+            margin: 10px 0;
+        }
+
+        section {
+            margin: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Web Encryption Challenge</h1>
+        <p>Complete the challenge by exploiting vulnerabilities and decrypting hints!</p>
+    </header>
+
+    <section>
+        <h2>Step 1: Gather Information</h2>
+        <p>Find the hidden vulnerabilities in the web application.</p>
+        <!-- Input field to simulate SQL Injection -->
+        <form id="userInputForm">
+            <label for="inputField">Enter a query (simulated vulnerability):</label>
+            <input type="text" id="inputField" placeholder="e.g., ' OR 1=1 --">
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <section id="hintSection">
+        <h2>Encrypted Hint</h2>
+        <p id="encryptedHint">U2FsdGVkX1+6JFP1oT21zYgAxP4VmcXql3cNhQ==</p> <!-- Simulated encrypted hint -->
+        <button onclick="decryptHint()">Decrypt Hint</button>
+    </section>
+
+    <section id="flagSection">
+        <h2>Your Flag:</h2>
+        <p id="flag">The flag is hidden.</p>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 CTF Challenge by Juliana Pinto de Albuquerque</p>
+    </footer>
+
+    <script>
+        // Simple AES decryption (simulated with a key for this demo)
+        const encryptedHint = "U2FsdGVkX1+6JFP1oT21zYgAxP4VmcXql3cNhQ==";  // Example encrypted hint (AES)
+
+        function decryptText(encryptedText) {
+            // This would be an AES decryption algorithm. Here we simulate a simple decryption.
+            // You can replace this with real encryption/decryption logic if necessary.
+            const decrypted = atob(encryptedText); // Simulating decryption using base64 decode
+            return decrypted;
+        }
+
+        function decryptHint() {
+            const hintText = decryptText(encryptedHint);
+            document.getElementById('encryptedHint').innerText = hintText; // Show decrypted hint
+        }
+
+        // Handle form submission to simulate SQL Injection vulnerability
+        document.getElementById('userInputForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let inputField = document.getElementById('inputField').value;
+
+            // Simulating a vulnerability with SQL Injection (simple check)
+            if (inputField.includes("' OR 1=1 --")) {
+                document.getElementById('flag').innerText = "You captured the flag: FLAG{successful_exploit}";
+            } else {
+                alert("Try exploiting the vulnerability!");
+            }
+        });
+    </script>
+</body>
+</html>
