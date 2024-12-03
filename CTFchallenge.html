@@ -41,6 +41,21 @@
     <h1>Capture the Flag - Web Encryption Challenge</h1>
     <p>Find the flag and decrypt it to reveal the answer. The flag is hidden on this page. Can you crack the code?</p>
     
+    <!-- SQL Injection Challenge -->
+    <h3>SQL Injection Vulnerability Challenge:</h3>
+    <form id="sqlForm" onsubmit="return handleSQLInjection(event)">
+        <label for="username">Username:</label>
+        <input type="text" id="username" placeholder="Enter username" required><br><br>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Enter password" required><br><br>
+        
+        <button type="submit">Login</button>
+    </form>
+    <div id="sqlResult"></div>
+    
+    <hr>
+    
     <!-- Button to reveal the hint (this is no longer encrypted) -->
     <button onclick="revealHint()">Find the Flag</button>
     
@@ -69,13 +84,4 @@
             
             // Check if the user input matches the decrypted flag
             if (userInput === decryptedFlag) {
-                document.getElementById("result").innerText = "Congratulations! You found the flag: " + decryptedFlag;
-                document.getElementById("result").style.color = "green";
-            } else {
-                document.getElementById("result").innerText = "Incorrect! Try again.";
-                document.getElementById("result").style.color = "red";
-            }
-        }
-    </script>
-</body>
-</html>
+       
