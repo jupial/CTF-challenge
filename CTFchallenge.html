@@ -104,7 +104,7 @@
         
         
         <div class="form-group">
-            <input type="text" id="flagInput" placeholder="Enter decrypted flag here" />
+            <input type="text" id="flagInput" placeholder="Enter flag here" />
             <button onclick="checkFlag()">Submit Flag</button>
         </div>
         
@@ -149,7 +149,7 @@
             // Check for successful SQL Injection
             if (username === "admin" && password === "admin' --") {
                 // Once SQL Injection is successful, we will show the encrypted flag message
-                displayResult("Congratulations! You've successfully broken into the system. Can you decrypt this? " + encryptedFlagMessage);
+                displayResult("Congratulations! You've successfully broken into the system. Can you decrypt this? " + encryptedFlagMessage, "success");
             } else {
                 displayResult("Login failed. Try using an SQL Injection.", "error");
             }
