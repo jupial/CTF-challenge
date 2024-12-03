@@ -120,10 +120,10 @@
 
         function checkFlag() {
             const userInput = document.getElementById("flagInput").value;
-            const decryptedFlag = atob(encryptedFlagMessage);  // Decrypt the flag using Base64 decode
+        
             
             if (userInput === decryptedFlag) {
-                displayResult("Congratulations! You found the flag: " + decryptedFlag, "success");
+                displayResult("Congratulations! You've successfully broken into the system. Can you decrypt this? " + encryptedFlagMessage);
             } else {
                 displayResult("Incorrect! Try again.", "error");
             }
