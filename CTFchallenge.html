@@ -123,7 +123,7 @@
         
             
             if (userInput === decryptedFlag) {
-                displayResult("Congratulations! You've successfully broken into the system. Can you decrypt this? " + encryptedFlagMessage);
+                displayResult("Congratulations! You found the flag: " + decryptedFlag, "success");
             } else {
                 displayResult("Incorrect! Try again.", "error");
             }
@@ -148,7 +148,7 @@
             // Check for successful SQL Injection
             if (username === "admin" && password === "admin' --") {
                 // Once SQL Injection is successful, we will show the encrypted flag message
-                displayResult("SQL Injection successful! The flag is now encrypted: " + encryptedFlagMessage, "success");
+                displayResult("Congratulations! You've successfully broken into the system. Can you decrypt this? " + encryptedFlagMessage);
             } else {
                 displayResult("Login failed. Try using an SQL Injection.", "error");
             }
