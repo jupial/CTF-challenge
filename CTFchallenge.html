@@ -84,4 +84,35 @@
             
             // Check if the user input matches the decrypted flag
             if (userInput === decryptedFlag) {
-       
+                document.getElementById("result").innerText = "Congratulations! You found the flag: " + decryptedFlag;
+                document.getElementById("result").style.color = "green";
+            } else {
+                document.getElementById("result").innerText = "Incorrect! Try again.";
+                document.getElementById("result").style.color = "red";
+            }
+        }
+
+        // SQL Injection vulnerability challenge handler
+        function handleSQLInjection(event) {
+            event.preventDefault();  // Prevent form submission for demonstration purposes
+
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+            
+            // Simulating an SQL query vulnerability
+            const query = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
+            
+            // Display the SQL query for demonstration purposes
+            document.getElementById("sqlResult").innerText = `Generated SQL query: ${query}`;
+
+            // For the vulnerability challenge: 
+            // A SQL injection like `admin' --` would bypass the login by commenting out the rest of the query.
+            // The flag would be revealed in the console or by a message after bypassing the login.
+            
+            if (username === "admin" && password === "admin' --") {
+                document.getElementById("sqlResult").innerText += "\nSQL Injection successful! You found the flag: " + atob(encryptedFlag);
+            }
+        }
+    </script>
+</body>
+</html>
