@@ -142,12 +142,12 @@
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
             
-            // Simulating a vulnerable SQL query
+            // Simulating a vulnerable SQL query (but we won't display this)
             const query = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
 
             // Check for successful SQL Injection
             if (username === "admin" && password === "admin' --") {
-                displayResult("SQL Injection successful! You found the flag: " + atob(encryptedFlag), "success");
+                displayResult("SQL Injection successful! You found the flag.", "success");
             } else {
                 displayResult("Login failed. Try using an SQL Injection.", "error");
             }
