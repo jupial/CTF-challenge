@@ -111,7 +111,7 @@
     </div>
 
     <script>
-        const encryptedFlag = "Q1RGe3lXbGJlX3R5aGVuY2U=";  // Base64 encoded "CTF{You_found_the_flag}"
+        const encryptedFlagMessage = "Q1RGe3lXbGJlX3R5aGVuY2U=";  // Base64 encoded "CTF{You_found_the_flag}"
 
         function revealHint() {
             document.getElementById("hint").style.display = "block";
@@ -120,7 +120,7 @@
 
         function checkFlag() {
             const userInput = document.getElementById("flagInput").value;
-            const decryptedFlag = atob(encryptedFlag);  // Decrypt the flag using Base64 decode
+            const decryptedFlag = atob(encryptedFlagMessage);  // Decrypt the flag using Base64 decode
             
             if (userInput === decryptedFlag) {
                 displayResult("Congratulations! You found the flag: " + decryptedFlag, "success");
@@ -147,7 +147,8 @@
 
             // Check for successful SQL Injection
             if (username === "admin" && password === "admin' --") {
-                displayResult("SQL Injection successful! You found the flag.", "success");
+                // Once SQL Injection is successful, we will show the encrypted flag message
+                displayResult("SQL Injection successful! The flag is now encrypted: " + encryptedFlagMessage, "success");
             } else {
                 displayResult("Login failed. Try using an SQL Injection.", "error");
             }
