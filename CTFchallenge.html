@@ -107,7 +107,7 @@
     </div>
 
     <script>
-        const encryptedFlagMessage = "Q1RGe1lvdS1Gb3VuZC1UaGUtRmxhZ30=";  
+        const encryptedFlagMessage = "Q1RGe1lvdS1Gb3VuZC1UaGUtRmxhZ30=";  // Base64 encrypted flag message
 
         function revealHint() {
             document.getElementById("hint").style.display = "block";
@@ -116,7 +116,7 @@
 
         function checkFlag() {
             const userInput = document.getElementById("flagInput").value;
-        
+            const decryptedFlag = atob(encryptedFlagMessage);  // Decrypt the flag using Base64 decode
             
             if (userInput === decryptedFlag) {
                 displayResult("Congratulations! You found the flag: " + decryptedFlag, "success");
