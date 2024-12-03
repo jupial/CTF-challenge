@@ -7,112 +7,71 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #f0f0f5;
             margin: 0;
             padding: 20px;
-        }
-        h1 {
             color: #333;
         }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h3 {
+            color: #555;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="password"] {
+            padding: 10px;
+            width: calc(100% - 22px);
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
         button {
-            padding: 10px 20px;
-            margin: 10px 0;
+            padding: 12px 20px;
             background-color: #4CAF50;
             color: white;
             border: none;
             cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
         }
         button:hover {
             background-color: #45a049;
         }
-        input {
-            padding: 10px;
-            width: 300px;
-            margin-right: 10px;
-        }
         #result {
             margin-top: 20px;
-            font-size: 1.5em;
-            color: green;
+            font-size: 1.2em;
         }
-    </style>
-</head>
-<body>
-    <h1>Capture the Flag - Web Encryption Challenge</h1>
-    <p>Find the flag and decrypt it to reveal the answer. The flag is hidden on this page. Can you crack the code?</p>
-    
-    <!-- SQL Injection Vulnerability Challenge -->
-    <h3>SQL Injection Vulnerability Challenge:</h3>
-    <form id="sqlForm" onsubmit="return handleSQLInjection(event)">
-        <label for="username">Username:</label>
-        <input type="text" id="username" placeholder="Enter username" required><br><br>
-        
-        <label for="password">Password:</label>
-        <input type="password" id="password" placeholder="Enter password" required><br><br>
-        
-        <button type="submit">Login</button>
-    </form>
-    <div id="sqlResult"></div>
-    
-    <hr>
-    
-    <!-- Button to reveal the hint (this is no longer encrypted) -->
-    <button onclick="revealHint()">Find the Flag</button>
-    
-    <!-- Input for user to enter decrypted flag -->
-    <input type="text" id="flagInput" placeholder="Enter decrypted flag here">
-    
-    <!-- Button to submit the decrypted flag -->
-    <button onclick="checkFlag()">Submit Flag</button>
-    
-    <!-- Display result message -->
-    <p id="result"></p>
-
-    <script>
-        // Encrypted flag (Base64 encoded)
-        const encryptedFlag = "Q1RGe3lXbGJlX3R5aGVuY2U=";  // "CTF{You_found_the_flag}" in base64
-
-        // Function to reveal the hint (no encryption here, just an informative hint)
-        function revealHint() {
-            document.getElementById("result").innerText = "The flag is encrypted in Base64, find the decryption!";
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
         }
-
-        // Function to check if the user's input matches the decrypted flag
-        function checkFlag() {
-            const userInput = document.getElementById("flagInput").value;
-            const decryptedFlag = atob(encryptedFlag);  // Decrypt the flag using Base64 decode
-            
-            // Check if the user input matches the decrypted flag
-            if (userInput === decryptedFlag) {
-                document.getElementById("result").innerText = "Congratulations! You found the flag: " + decryptedFlag;
-                document.getElementById("result").style.color = "green";
-            } else {
-                document.getElementById("result").innerText = "Incorrect! Try again.";
-                document.getElementById("result").style.color = "red";
-            }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
         }
-
-        // SQL Injection vulnerability challenge handler
-        function handleSQLInjection(event) {
-            event.preventDefault();  // Prevent form submission for demonstration purposes
-
-            const username = document.getElementById("username").value;
-            const password = document.getElementById("password").value;
-            
-            // Simulating an SQL query vulnerability
-            const query = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
-            
-            // Display the SQL query for demonstration purposes
-            document.getElementById("sqlResult").innerText = `Generated SQL query: ${query}`;
-
-            // For the vulnerability challenge: 
-            // A SQL injection like `admin' --` would bypass the login by commenting out the rest of the query.
-            // The flag would be revealed in the console or by a message after bypassing the login.
-            
-            if (username === "admin" && password === "admin' --") {
-                document.getElementById("sqlResult").innerText += "\nSQL Injection successful! You found the flag: " + atob(encryptedFlag);
-            }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
         }
-    </script>
-</body>
-</html>
+    
