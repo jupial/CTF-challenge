@@ -3,106 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CTF Web Encryption Challenge</title>
+    <title>CTF Encryption Challenge</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0; 
-            padding: 0;
             background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
             color: #333;
         }
-
-        header {
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
-
-        h1, h2 {
+        button {
+            padding: 10px 20px;
             margin: 10px 0;
-        }
-
-        section {
-            margin: 20px;
-            padding: 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        footer {
-            text-align: center;
-            padding: 10px;
             background-color: #4CAF50;
             color: white;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        input {
+            padding: 10px;
+            width: 300px;
+            margin-right: 10px;
+        }
+        #hint {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 1.5em;
+            color: green;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>Web Encryption Challenge</h1>
-        <p>Complete the challenge by exploiting vulnerabilities and decrypting hints!</p>
-    </header>
-
-    <section>
-        <h2>Step 1: Gather Information</h2>
-        <p>Find the hidden vulnerabilities in the web application.</p>
-        <!-- Input field to simulate SQL Injection -->
-        <form id="userInputForm">
-            <label for="inputField">Enter a query (simulated vulnerability):</label>
-            <input type="text" id="inputField" placeholder="e.g., ' OR 1=1 --">
-            <button type="submit">Submit</button>
-        </form>
-    </section>
-
-    <section id="hintSection">
-        <h2>Encrypted Hint</h2>
-        <p id="encryptedHint">U2FsdGVkX1+6JFP1oT21zYgAxP4VmcXql3cNhQ==</p> <!-- Simulated encrypted hint -->
-        <button onclick="decryptHint()">Decrypt Hint</button>
-    </section>
-
-    <section id="flagSection">
-        <h2>Your Flag:</h2>
-        <p id="flag">The flag is hidden.</p>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 CTF Challenge by Juliana Pinto de Albuquerque</p>
-    </footer>
+    <h1>Capture the Flag - Web Encryption Challenge</h1>
+    <p>Find the encrypted flag and decrypt it to reveal the answer. The encrypted flag is hidden on this page. Can you crack the code?</p>
+    
+    <!-- Button to reveal encrypted flag -->
+    <button onclick="revealEncryptedFlag()">Find the Flag</button>
+    
+    <!-- Display hint with encrypted flag -->
+    <p id="hint"></p>
+    
+    <!-- Input for user to enter decrypted flag -->
+    <input type="text" id="flagInput" placeholder="Enter decrypted flag here">
+    
+    <!-- Button to submit the decrypted flag -->
+    <button onclick="checkFlag()">Submit Flag</button>
+    
+    <!-- Display result message -->
+    <p id="result"></p>
 
     <script>
-        // Simple AES decryption (simulated with a key for this demo)
-        const encryptedHint = "U2FsdGVkX1+6JFP1oT21zYgAxP4VmcXql3cNhQ==";  // Example encrypted hint (AES)
+        // Encrypted flag (Base64 encoded)
+        const encryptedFlag = "Q1RGe3lXbGJlX3R5aGVuY2U=";  // "CTF{You_found_the_flag}" in base64
 
-        function decryptText(encryptedText) {
-            // This would be an AES decryption algorithm. Here we simulate a simple decryption.
-            // You can replace this with real encryption/decryption logic if necessary.
-            const decrypted = atob(encryptedText); // Simulating decryption using base64 decode
-            return decrypted;
+        // Function to reveal the encrypted flag when the user clicks 'Find the Flag'
+        function revealEncryptedFlag() {
+            document.getElementById("hint").innerText = "Encrypted Flag (Base64): " + encryptedFlag;
         }
 
-        function decryptHint() {
-            const hintText = decryptText(encryptedHint);
-            document.getElementById('encryptedHint').innerText = hintText; // Show decrypted hint
-        }
-
-        // Handle form submission to simulate SQL Injection vulnerability
-        document.getElementById('userInputForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            let inputField = document.getElementById('inputField').value;
-
-            // Simulating a vulnerability with SQL Injection (simple check)
-            if (inputField.includes("' OR 1=1 --")) {
-                document.getElementById('flag').innerText = "You captured the flag: FLAG{successful_exploit}";
+        // Function to check if the user's input matches the decrypted flag
+        function checkFlag() {
+            const userInput = document.getElementById("flagInput").value;
+            const decryptedFlag = atob(encryptedFlag);  // Decrypt the flag using Base64 decode
+            
+            // Check if the user input matches the decrypted flag
+            if (userInput === decryptedFlag) {
+                document.getElementById("result").innerText = "Congratulations! You found the flag: " + decryptedFlag;
+                document.getElementById("result").style.color = "green";
             } else {
-                alert("Try exploiting the vulnerability!");
+                document.getElementById("result").innerText = "Incorrect! Try again.";
+                document.getElementById("result").style.color = "red";
             }
-        });
+        }
     </script>
 </body>
 </html>
