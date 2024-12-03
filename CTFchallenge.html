@@ -147,7 +147,7 @@
             const query = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
 
             // Check for successful SQL Injection
-            if (username === "admin" && password === "admin' --") {
+            if (username === "admin" && password.includes("'OR 1=1 --")) {
                 // Once SQL Injection is successful, we will show the encrypted flag message
                 displayResult("Congratulations! You've successfully broken into the system. Can you decrypt this? " + encryptedFlagMessage, "success");
             } else {
