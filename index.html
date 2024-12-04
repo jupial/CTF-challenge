@@ -79,7 +79,7 @@
 <body>
     <div class="container">
         <h1>Capture the Flag - Web Encryption Challenge</h1>
-        <p>Welcome to the Capture the Flag (CTF) Encryption Challenge! Use SQL injection to proceed to the next step.</p>
+        <p>Welcome to the Capture the Flag (CTF) Encryption Challenge!</p>
         
         <h3>Login Form:</h3>
         <form id="sqlForm" onsubmit="return handleSQLInjection(event)">
@@ -104,7 +104,7 @@
             const password = document.getElementById("password").value;
 
             // Check for SQL injection vulnerability in the password input
-            if (password.includes("' OR 1=1 --")) {
+            if (password.includes("' OR 1=1 --") && username === admin) {
                 // Redirect to the hidden key page
                 window.location.href = "hidden.html";
             } else {
