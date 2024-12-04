@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTF Encryption Challenge</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif; 
+            background-color: #f0f0f5;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h3 {
+            color: #555;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="password"] {
+            padding: 10px;
+            width: calc(100% - 22px);
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            padding: 12px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Capture the Flag - Web Encryption Challenge</h1>
+        <p>Welcome to the Capture the Flag (CTF) Encryption Challenge! Use SQL injection to proceed to the next step.</p>
+        
+        <h3>Login Form:</h3>
+        <form id="sqlForm" onsubmit="return handleSQLInjection(event)">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" placeholder="Enter username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Enter password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <div id="sqlResult"></div>
+    </div>
+
+    <script>
+        function handleSQLInjection(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            // Check for SQL injection vulnerability in the password input
+            if (password.includes("' OR 1=1 --")) {
+                // Redirect to the hidden key page
+                window.location.href = "hidden.html";
+            } else {
+                const resultElement = document.getElementById("sqlResult");
+                resultElement.innerHTML = "Login failed. Try using an SQL Injection.";
+                resultElement.classList.remove('success');
+                resultElement.classList.add('error');
+            }
+        }
+    </script>
+</body>
+</html>
