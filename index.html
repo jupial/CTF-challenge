@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CTF Encryption Challenge</title>
+    <title>CTF SQL Injection Challenge</title>
     <style>
         body {
-            font-family: Arial, sans-serif; 
+            font-family: Arial, sans-serif;
             background-color: #f0f0f5;
             margin: 0;
             padding: 20px;
@@ -78,8 +78,8 @@
 </head>
 <body>
     <div class="container">
-        <h1>Capture the Flag - Web Encryption Challenge</h1>
-        <p>Welcome to the Capture the Flag (CTF) Encryption Challenge!</p>
+        <h1>Capture the Flag - SQL Injection Challenge</h1>
+        <p>Welcome to the Capture the Flag (CTF) SQL Injection Challenge! Use SQL injection to bypass the login and proceed to the next step.</p>
         
         <h3>Login Form:</h3>
         <form id="sqlForm" onsubmit="return handleSQLInjection(event)">
@@ -103,13 +103,16 @@
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
 
-            // Check for SQL injection vulnerability in the password input
-            if (password.includes("' OR 1=1 --") && username === admin) {
-                // Redirect to the hidden key page
+            // Simulate a SQL query
+            const query = `SELECT * FROM users WHERE username = '${username}' AND password = '${password}'`;
+
+            // Check for successful SQL Injection
+            if (username === "admin" && password.includes("' OR 1=1 --")) {
+                console.log("Executed Query: " + query);
                 window.location.href = "hidden.html";
             } else {
                 const resultElement = document.getElementById("sqlResult");
-                resultElement.innerHTML = "Login failed. Try using an SQL Injection.";
+                resultElement.innerHTML = "Login failed. Make sure the username is 'admin' and use an SQL Injection attack for the password.";
                 resultElement.classList.remove('success');
                 resultElement.classList.add('error');
             }
